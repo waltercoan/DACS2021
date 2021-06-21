@@ -12,11 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class Home {
+public class HomeController {
     
     @GetMapping
     public ModelAndView index(){
         /*logica muito doida! */
+
         Date dataAgora = new Date();
         SimpleDateFormat sdf 
             = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
