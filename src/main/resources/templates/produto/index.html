@@ -18,11 +18,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Produto 1</td>
-                        <td>R$ 200,00</td>
-                        <td>21/06/2021</td>
-                        <td>Categoria 1</td>
+                    <tr th:each="umproduto : ${listaProdutos}">
+                        <td th:text="${umproduto.descricao}"></td>
+                        <td th:text="${umproduto.preco}"></td>
+                        <td th:text="${umproduto.dataRegistro}"></td>
+                        <td th:text="${umproduto.categoria}"></td>
                     </tr>
                 </tbody>
             </table>    

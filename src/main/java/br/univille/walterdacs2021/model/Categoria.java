@@ -12,6 +12,10 @@ public class Categoria {
     private long id;
     private String nome;
 
+    public String toString(){
+        return this.getNome();
+    }
+
     public long getId() {
         return id;
     }
