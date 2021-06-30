@@ -17,6 +17,7 @@
                         <th>Preço</th>
                         <th>Data</th>
                         <th>Categoria</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,7 @@
                         <td th:text="${umproduto.preco}"></td>
                         <td th:text="${umproduto.dataRegistro}"></td>
                         <td th:text="${umproduto.categoria}"></td>
+                        <td><a th:href="@{'/produto/alterar/'+${umproduto.id}}" class="btn btn-primary">Alterar</a></td>
                     </tr>
                 </tbody>
             </table>    

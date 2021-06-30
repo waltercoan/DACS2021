@@ -8,18 +8,31 @@
         <div class="container">
 			<nav th:replace="layout :: menu">(menu)</nav>
 
-            <form action="/produto/save" method="POST">
+            <form th:action="@{/produto/(form)}" th:object="${produto}" method="POST">
+
+                <input type="hidden" th:field="*{id}">
+
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="txtnome">Nome:</label>
-                            <input type="text" name="nome" id="txtnome" class="form-control"> 
+                            <label for="txtdescricao">Descrição:</label>
+                            <input type="text" th:field="*{descricao}" id="txtdescricao" class="form-control"> 
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label for="txtpreco">Preço:</label>
-                            <input type="text" name="preco" id="txtpreco"  class="form-control">
+                            <input type="text" th:field="*{preco}" id="txtpreco" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtdata">Data Registro:</label>
+                            <input type="text" th:field="*{dataRegistro}" id="txtdata" class="form-control">
                         </div>
                     </div>
                 </div>
