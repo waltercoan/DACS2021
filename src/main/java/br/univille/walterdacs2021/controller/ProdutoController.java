@@ -57,4 +57,10 @@ public class ProdutoController {
         return new ModelAndView("produto/form","produto",produto);
     }
 
+    @GetMapping(value = "/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Produto produto){
+        service.delete(produto);
+        return new ModelAndView("redirect:/produto");
+    }
+
 }

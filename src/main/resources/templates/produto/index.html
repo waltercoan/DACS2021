@@ -10,7 +10,7 @@
             
             <a th:href="@{/produto/novo}" class="btn btn-primary">  Novo  </a>
 
-            <table class="table">
+            <table class="table" id="produtos">
                 <thead>
                     <tr>
                         <th>Descrição</th>
@@ -26,12 +26,38 @@
                         <td th:text="${umproduto.preco}"></td>
                         <td th:text="${umproduto.dataRegistro}"></td>
                         <td th:text="${umproduto.categoria}"></td>
-                        <td><a th:href="@{'/produto/alterar/'+${umproduto.id}}" class="btn btn-primary">Alterar</a></td>
+                        <td>
+                            <a th:href="@{'/produto/alterar/'+${umproduto.id}}" class="btn btn-primary">Alterar</a>
+                            <button class="btn btn-danger js-delete" 
+                                    th:data-id="${umproduto.id}" >Excluir</button>                            
+                        </td>
                     </tr>
                 </tbody>
             </table>    
 
         </div>
         <div th:include="layout :: footer" id="footer">(footer)</div>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                $("#produtos").on("click",".js-delete", function(){
+                    let button = $(this);
+                    bootbox.confirm("Você confirma a exclusão do registro?", function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/produto/delete/" + button.attr("data-id"),
+                                method : "GET",
+                                success : function(){
+                                    window.location.href = "/produto/";
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+
+
     </body>
 </html> 
