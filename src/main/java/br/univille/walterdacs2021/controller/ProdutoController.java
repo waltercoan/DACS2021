@@ -59,11 +59,10 @@ public class ProdutoController {
     public ModelAndView novo(@ModelAttribute Produto produto){
         HashMap<String,Object> dados = new HashMap<>();
 
-        List<Produto> listaProdutos = service.getAllProdutos();
-        dados.put("listaProdutos",listaProdutos);
+        dados.put("produto",produto);
         List<Categoria> listaCategorias = categoriaService.getAllCategorias();
         dados.put("listaCategorias",listaCategorias);
-        return new ModelAndView("produto/form");
+        return new ModelAndView("produto/form",dados);
     }
 
     @PostMapping(params = "form")
