@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+    
+    <body>
+        <div class="container">
+			<nav th:replace="layout :: menu">(menu)</nav>
+            <a th:href="@{/categoria/novo}" class="btn btn-primary">  Novo  </a>
+            <table class="table" id="categorias">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="umacategoria : ${listaCategorias}">
+                        <td th:text="${umacategoria.nome}"></td>
+                        <td>
+                            <a th:href="@{'/categoria/alterar/'+${umacategoria.id}}" class="btn btn-primary">Alterar</a>
+                            <button class="btn btn-danger js-delete" 
+                                    th:data-id="${umacategoria.id}" >Excluir</button>    
+                        </td>
+                    </tr>
+                </tbody>
+            </table>    
+
+        </div>
+        <div th:include="layout :: footer" id="footer">(footer)</div>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                $("#categorias").on("click",".js-delete", function(){
+                    let button = $(this);
+                    bootbox.confirm("Você confirma a exclusão do registro?", function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/categoria/delete/" + button.attr("data-id"),
+                                method : "GET",
+                                success : function(){
+                                    window.location.href = "/categoria/";
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html> 

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Produto {
     @Id
@@ -22,6 +24,7 @@ public class Produto {
     private String descricao;
     private float preco;
     @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataRegistro;
 
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
