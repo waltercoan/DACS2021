@@ -23,6 +23,14 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
     
+    /* 
+    Date aniversario = new Date();
+
+    Atributo - Variavel
+    public/private tipo nome;
+    Método - Função
+    public tipo nome (parametros) { corpo } */
+
     @GetMapping
     public ModelAndView index(){
         /*Produto prod1 = new Produto();
