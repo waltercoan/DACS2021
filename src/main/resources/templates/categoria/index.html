@@ -19,6 +19,7 @@
                     <tr th:each="umacategoria : ${listaCategorias}">
                         <td th:text="${umacategoria.nome}"></td>
                         <td>
+                            <a th:href="@{'/categoria/alterar/'+${umacategoria.id}}" class="btn btn-primary">Alterar</a>
                         </td>
                     </tr>
                 </tbody>

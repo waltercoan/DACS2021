@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,5 +46,10 @@ public class CategoriaController {
     public ModelAndView save(Categoria categoria){
         service.save(categoria);
         return new ModelAndView("redirect:/categoria");
+    }
+
+    @GetMapping(value = "/alterar/{id}")
+    public ModelAndView alterar(@PathVariable("id") Categoria categoria){
+        return new ModelAndView("categoria/form","categoria",categoria);
     }
 }
