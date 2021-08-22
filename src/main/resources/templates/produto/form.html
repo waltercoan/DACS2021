@@ -32,7 +32,20 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="txtdata">Data Registro:</label>
-                            <input type="text" th:field="*{dataRegistro}" id="txtdata" class="form-control">
+                            <input type="date" th:field="*{dataRegistro}" id="txtdata" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="slccategoria">Cagetoria:</label>
+                            <select class="form-control" id="slccategoria" th:field="*{categoria}">
+                                <option th:value="${umaCategoria.id}" 
+                                        th:text="${umaCategoria.nome}"
+                                        th:each="umaCategoria : ${listaCategorias}">
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>
