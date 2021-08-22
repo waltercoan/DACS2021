@@ -52,4 +52,10 @@ public class CategoriaController {
     public ModelAndView alterar(@PathVariable("id") Categoria categoria){
         return new ModelAndView("categoria/form","categoria",categoria);
     }
+
+    @GetMapping(value = "/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Categoria categoria){
+        service.delete(categoria);
+        return new ModelAndView("redirect:/categoria");
+    }
 }
