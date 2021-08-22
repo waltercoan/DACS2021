@@ -47,19 +47,22 @@ public class ProdutoController {
         prod2.setDescricao("Produto legal 2");
         prod2.setDataRegistro(new Date());
         prod2.setPreco(5000);*/
+
+        List<Produto> listaProdutos = service.getAllProdutos();
+
+        /*listaProdutos.add(prod1);
+        listaProdutos.add(prod2);*/
+
+        return new ModelAndView("produto/index","listaProdutos",listaProdutos);
+    }
+    @GetMapping("/novo")
+    public ModelAndView novo(@ModelAttribute Produto produto){
         HashMap<String,Object> dados = new HashMap<>();
 
         List<Produto> listaProdutos = service.getAllProdutos();
         dados.put("listaProdutos",listaProdutos);
         List<Categoria> listaCategorias = categoriaService.getAllCategorias();
         dados.put("listaCategorias",listaCategorias);
-        /*listaProdutos.add(prod1);
-        listaProdutos.add(prod2);*/
-
-        return new ModelAndView("produto/index",dados);
-    }
-    @GetMapping("/novo")
-    public ModelAndView novo(@ModelAttribute Produto produto){
         return new ModelAndView("produto/form");
     }
 
