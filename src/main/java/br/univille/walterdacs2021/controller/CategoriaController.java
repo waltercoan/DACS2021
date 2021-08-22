@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,5 +34,16 @@ public class CategoriaController {
         List<Categoria> listaCategoria = service.getAllCategorias();
 
         return new ModelAndView("categoria/index","listaCategorias",listaCategoria);
+    }
+
+    @GetMapping("/novo")
+    public ModelAndView novo(@ModelAttribute Categoria categoria){
+        return new ModelAndView("categoria/form");
+    }
+
+    @PostMapping(params = "form")
+    public ModelAndView save(Categoria categoria){
+        service.save(categoria);
+        return new ModelAndView("redirect:/categoria");
     }
 }
