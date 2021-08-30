@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Venda {
     @Id
@@ -22,6 +24,7 @@ public class Venda {
     private long id;
     private float valorTotal;
     @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data;
     @Column(length = 15)
     private String cupom;
