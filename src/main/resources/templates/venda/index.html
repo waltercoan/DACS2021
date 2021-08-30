@@ -23,6 +23,7 @@
                         <td th:text="${umavenda.data}"></td>
                         <td th:text="${umavenda.valorTotal}"></td>
                         <td>
+                            <a th:href="@{'/venda/alterar/'+${umavenda.id}}" class="btn btn-secondary">Alterar</a>
                         </td>
                     </tr>
                 </tbody>
