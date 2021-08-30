@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+    
+    <body>
+        <div class="container">
+			<nav th:replace="layout :: menu">(menu)</nav>
+
+            <form th:action="@{/venda}" th:object="${venda}" method="POST">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtdata">Data:</label>
+                            <input type="date" th:field="*{data}" id="txtdata" class="form-control"> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtcupom">Cupom:</label>
+                            <input type="text" th:field="*{cupom}" id="txtcupom" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Novo Item de Venda</div>
+                    <div class="card-body">
+                        <div class="container" th:object="${novoitemvenda}">
+                          <div class="row">
+                            <div class="col-sm">
+                                <label for="slcproduto">Produto</label>
+                            </div>
+                            <div class="col-md">
+                                <select class="form-control" id="slcpaciente" th:field="${novoitemvenda.produto}">
+                                    <option th:value="${umproduto.id}" 
+                                            th:text="${umproduto.descricao}"
+                                            th:each="umproduto : ${listaProdutos}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-sm">
+                              <label for="txtvalordesconto">Desconto</label>
+                            </div>
+                            <div class="col-sm">
+                              <input type="text" class="form-control" id="txtvalordesconto" th:field="${novoitemvenda.valorDesconto}" placeholder="Valor Desconto">
+                            </div>
+                            <div class="col-sm">
+                                <button type="submit" name="insertproc" class="btn btn-primary">Inserir item</button>
+                            </div>
+                          </div>
+                        </div>
+                        <br>                           
+                    </div>
+                </div>
+
+                <div class="card">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Valor Desconto</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr scope="row" th:each="umitemvenda, stat : ${venda.colItemVenda}">
+                                <input type="hidden" th:field="${venda.colItemVenda[__${stat.index}__].produto}"/>
+                                <input type="hidden" th:field="${venda.colItemVenda[__${stat.index}__].valor}"/>
+                                <input type="hidden" th:field="${venda.colItemVenda[__${stat.index}__].valorDesconto}"/>
+                                <td th:text="${umitemvenda.produto.descricao}"></td>
+                                <td th:text="${umitemvenda.valor}"></td>
+                                <td th:text="${umitemvenda.valorDesconto}"></td>
+                                <td>
+                                    <button type="submit" name="removeproc" th:value="__${stat.index}__" class="btn btn-primary">Remover</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="submit">Enviar</button>
+
+            </form>
+
+        </div>
+        <div th:include="layout :: footer" id="footer">(footer)</div>
+    </body>
+</html> 

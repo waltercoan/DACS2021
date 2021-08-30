@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+    
+    <body>
+        <div class="container">
+			<nav th:replace="layout :: menu">(menu)</nav>
+            
+            <a th:href="@{/venda/novo}" class="btn btn-primary">  Nova Venda  </a>
+
+            <table class="table" id="vendas">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Valor Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="umavenda : ${listaVendas}">
+                        <td th:text="${umavenda.data}"></td>
+                        <td th:text="${umavenda.valorTotal}"></td>
+                        <td>
+                            <a th:href="@{'/venda/alterar/'+${umavenda.id}}" class="btn btn-secondary">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                                    th:data-id="${umavenda.id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>    
+
+        </div>
+        <div th:include="layout :: footer" id="footer">(footer)</div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#vendas").on('click', ".js-delete", function(){
+                    let button = $(this);
+                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/venda/delete/" + button.attr("data-id"),
+                                method: "GET",
+                                success : function(){
+                                    window.location.href = "/venda/";
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script> 
+
+    </body>
+</html> 
