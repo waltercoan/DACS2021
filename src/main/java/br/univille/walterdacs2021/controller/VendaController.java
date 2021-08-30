@@ -91,4 +91,10 @@ public class VendaController {
         dados.put("novoitemvenda", new ItemVenda());
         return new ModelAndView("venda/form",dados);
     }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Venda venda){
+        service.delete(venda);
+        return new ModelAndView("redirect:/venda");
+    }
 }
