@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,5 +65,18 @@ public class ProdutoControllerAPI {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> update(@PathVariable("id") Produto produtoAntigo,
+                                            @RequestBody Produto produtoAlterado){
+        produtoAntigo.setDescricao(produtoAlterado.getDescricao());
+        produtoAntigo.setPreco(produtoAlterado.getPreco());
+        produtoAntigo.setDataRegistro(produtoAlterado.getDataRegistro());
+        produtoAntigo.setCategoria(produtoAlterado.getCategoria());
+        
+        service.save(produtoAntigo);
+
+        return new ResponseEntity<Produto>(produtoAntigo,HttpStatus.OK);
+
+    }
 
 }
