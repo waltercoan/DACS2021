@@ -19,5 +19,10 @@ public class FornecedorServiceImpl implements FornecedorService{
     public List<Fornecedor> getAllFornecedores() {
         return repository.findAll();
     }
+
+    @Override
+    public Fornecedor getFornecedor(long id) {
+        return repository.getById(id);
+    }
     
 }
